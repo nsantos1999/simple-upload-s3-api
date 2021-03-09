@@ -23,10 +23,9 @@
     "paths": {
       "@controllers/*": ["./controllers/*"],
       "@routes/*": ["./routes/*"],
-      "@models/*": ["./models/*"]
+      "@models/*": ["./models/*"],
+      "@interfaces/*": ["./interfaces/*"],
+      "@configs/*": ["./configs/*"]
     }
-  },
-  "include": [
-    "src/**/*"
-  ]
+  }
 }
