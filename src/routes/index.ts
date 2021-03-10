@@ -1,9 +1,9 @@
 import { Router } from "express";
 
-import fileRoutes from "@routes/file.routes";
+import postRoutes from "@routes/post.routes";
 
 const app = Router();
 
-app.use("/file", fileRoutes);
+app.use("/post", postRoutes);
 
 export default app;

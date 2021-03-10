@@ -1,9 +1,9 @@
-import { File } from "@models/File";
+import { Post } from "@models/Post";
 import { Request, Response } from "express";
 
-export class FileController {
+export class PostController {
   static async findAll(req: Request, res: Response) {
-    const files = await File.find();
+    const files = await Post.find();
 
     return res.json(files);
   }
@@ -13,13 +13,23 @@ export class FileController {
 
     const { originalname: name, size, key, location: url = "" } = file;
 
-    const fileCreated = await File.create({
+    const post = await Post.create({
       name,
       size,
       key,
       url,
     });
 
-    return res.json(fileCreated);
+    return res.json(post);
+  }
+
+  static async delete(req: Request, res: Response) {
+    const { id } = req.params;
+
+    const post = await Post.findById(id);
+
+    await post?.remove();
+
+    return res.end();
   }
 }
