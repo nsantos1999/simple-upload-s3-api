@@ -10,6 +10,7 @@ import cors from "cors";
 
 import { MongoDBConnect } from "@infra/MongoDBConnect";
 import { SQSConnect } from "@infra/SQSConnect";
+import { CompressImageQueueHandlerProvider } from "@providers/implementations/CompressImageQueueHandlerProvider";
 
 const app = express();
 
@@ -23,7 +24,11 @@ setup();
 
 async function setup() {
   console.log("Connecting with all dependencies... Await!");
-  await connectDependencies([new MongoDBConnect(), new SQSConnect()]);
+  await connectDependencies([
+    new MongoDBConnect(),
+    new SQSConnect([new CompressImageQueueHandlerProvider()]),
+  ]);
+
   startServer();
 }
 
