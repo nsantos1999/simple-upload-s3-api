@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(routes);
 
-setup();
+setup().then(startServer);
 
 async function setup() {
   console.log("Connecting with all dependencies... Await!");
@@ -28,8 +28,6 @@ async function setup() {
     new MongoDBConnect(),
     new SQSConnect([new CompressImageQueueHandlerProvider()]),
   ]);
-
-  startServer();
 }
 
 function startServer() {
