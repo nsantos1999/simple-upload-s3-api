@@ -1,12 +1,15 @@
 import * as dotenv from "dotenv";
+
 dotenv.config();
 
 import express from "express";
 import routes from "@routes/index";
 import { IConnection } from "@interfaces/IConnection";
-import { MongoDBConnect } from "@configs/MongoDBConnect";
 import morgan from "morgan";
 import cors from "cors";
+
+import { MongoDBConnect } from "@infra/MongoDBConnect";
+import { SQSConnect } from "@infra/SQSConnect";
 
 const app = express();
 
@@ -20,7 +23,7 @@ setup();
 
 async function setup() {
   console.log("Connecting with all dependencies... Await!");
-  await connectDependencies([new MongoDBConnect()]);
+  await connectDependencies([new MongoDBConnect(), new SQSConnect()]);
   startServer();
 }
 

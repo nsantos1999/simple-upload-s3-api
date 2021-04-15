@@ -25,7 +25,10 @@
       "@routes/*": ["./routes/*"],
       "@models/*": ["./models/*"],
       "@interfaces/*": ["./interfaces/*"],
-      "@configs/*": ["./configs/*"]
+      "@configs/*": ["./configs/*"],
+      "@infra/*": ["./infra/*"],
+      "@services/*": ["./services/*"],
+      "@providers/*": ["./providers/*"]
     }
   }
 }
