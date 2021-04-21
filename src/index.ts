@@ -11,6 +11,8 @@ import cors from "cors";
 import { MongoDBConnect } from "@infra/MongoDBConnect";
 import { SQSConnect } from "@infra/SQSConnect";
 import { CompressImageQueueHandlerProvider } from "@providers/implementations/CompressImageQueueHandlerProvider";
+import { SNSSubscribersConnect } from "@infra/SNSSubscribersConnect";
+import { CompressImageSnsSubcriber } from "@sns/Subscribers/implementations/CompressImageSnsSubscriber";
 
 const app = express();
 
@@ -20,13 +22,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(routes);
 
-setup().then(startServer);
-
 async function setup() {
   console.log("Connecting with all dependencies... Await!");
   await connectDependencies([
     new MongoDBConnect(),
-    new SQSConnect([new CompressImageQueueHandlerProvider()]),
+    new SNSSubscribersConnect([new CompressImageSnsSubcriber()]),
+    // new SQSConnect([new CompressImageQueueHandlerProvider()]),
   ]);
 }
 
@@ -41,3 +42,5 @@ async function connectDependencies(connections: IConnection[]) {
     await connection.connect();
   }
 }
+
+setup().then(startServer);

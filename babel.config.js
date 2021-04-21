@@ -23,6 +23,7 @@ module.exports = {
           "@infra": "./src/infra",
           "@providers": "./src/providers",
           "@services": "./src/services",
+          "@sns": "./src/sns",
         },
       },
     ],
